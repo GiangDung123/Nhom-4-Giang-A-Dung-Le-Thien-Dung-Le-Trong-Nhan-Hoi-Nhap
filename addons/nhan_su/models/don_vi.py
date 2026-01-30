@@ -2,7 +2,7 @@ from odoo import models, fields, api
 
 
 class DonVi(models.Model):
-    _name = 'don_vi'
+    _name = 'nhan_su.don_vi'
     _description = 'Bảng chứa thông tin đơn vị'
     _rec_name = 'ten_don_vi'
 

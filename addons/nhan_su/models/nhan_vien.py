@@ -4,7 +4,7 @@ from datetime import date
 from odoo.exceptions import ValidationError
 
 class NhanVien(models.Model):
-    _name = 'nhan_vien'
+    _name = 'nhan_su.nhan_vien'
     _description = 'Bảng chứa thông tin nhân viên'
     _rec_name = 'ho_va_ten'
     _order = 'ten asc, tuoi desc'
@@ -20,27 +20,32 @@ class NhanVien(models.Model):
     email = fields.Char("Email")
     so_dien_thoai = fields.Char("Số điện thoại")
     lich_su_cong_tac_ids = fields.One2many(
-        "lich_su_cong_tac", 
-        inverse_name="nhan_vien_id", 
-        string = "Danh sách lịch sử công tác")
+        'nhan_su.lich_su_cong_tac',
+        'nhan_vien_id',
+        string='Lịch sử công tác'
+    )
     tuoi = fields.Integer("Tuổi", compute="_compute_tuoi", store=True)
     anh = fields.Binary("Ảnh")
     danh_sach_chung_chi_bang_cap_ids = fields.One2many(
-        "danh_sach_chung_chi_bang_cap", 
+        'nhan_su.danh_sach_chung_chi_bang_cap',
         inverse_name="nhan_vien_id", 
         string = "Danh sách chứng chỉ bằng cấp")
-    so_nguoi_bang_tuoi = fields.Integer("Số người bằng tuổi", 
-                                        compute="so_nguoi_bang_tuoi",
-                                        store=True
-                                        )
+    so_nguoi_bang_tuoi = fields.Integer(
+    compute="_compute_so_nguoi_bang_tuoi",
+    store=True
+)
+    luong_co_ban = fields.Float(
+        string='Lương cơ bản',
+        required=True
+    )
     
     @api.depends("tuoi")
     def _compute_so_nguoi_bang_tuoi(self):
         for record in self:
             if record.tuoi:
-                records = self.env['nhan_vien'].search(
+                records = self.env['nhan_su.nhan_vien'].search(
                     [
-                        ('tuoi', '=', record.tuoi),
+                        ('tuoi', '=', record.tuoi), 
                         ('ma_dinh_danh', '!=', record.ma_dinh_danh)
                     ]
                 )

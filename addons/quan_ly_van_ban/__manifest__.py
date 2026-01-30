@@ -7,11 +7,11 @@
         subtitle on modules listing or apps.openerp.com""",
 
     'description': """
-        Long description of module's purpose
+        Quan ly van ban 
     """,
 
-    'author': "FIT-DNU",
-    'website': "https://ttdn1501.aiotlabdnu.xyz/web",
+    'author': "Nhom 2 - CNTT 1504",
+    'website': "http://www.yourcompany.com",
 
     # Categories can be used to filter modules in modules listing
     # Check https://github.com/odoo/odoo/blob/15.0/odoo/addons/base/data/ir_module_category_data.xml
@@ -20,14 +20,20 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base'],
+    'depends': ['base','nhan_su'],
 
     # always loaded
     'data': [
         'security/ir.model.access.csv',
-        'views/van_ban_den.xml',
         'views/van_ban_di.xml',
+        'views/trang_thai.xml',
+        'views/do_mat.xml',
         'views/loai_van_ban.xml',
+        'views/van_ban_den.xml',
+        'views/nam.xml',
+        'views/cong_viec.xml',
+        'views/ho_so.xml',
+        'views/dashboard.xml',
         'views/menu.xml',
     ],
     # only loaded in demonstration mode
